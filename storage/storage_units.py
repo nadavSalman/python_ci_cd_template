@@ -39,7 +39,7 @@ def say_kuku():
 
 def main():
     print('Run : ', os.path.realpath(__file__),' as __main__')
-
+    call_unit_store_object_summarize()
 
 if __name__ == '__main__':
 	main()
