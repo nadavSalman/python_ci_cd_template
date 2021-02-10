@@ -42,7 +42,7 @@ jobs:
         echo 'Soon will be transfer to pytest'
         python -m unittest -v
     
-  Deploy to Cloud Run:
+  Deploy_to_Cloud_Run:
     needs: build 
 
     runs-on: ubuntu-latest
