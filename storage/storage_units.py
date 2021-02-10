@@ -13,6 +13,12 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))#Ad
 
 from items.item import *
 
+def generate_unit_name():
+    return ""
+
+def check_generate_name_validation(name):
+    return True
+
 
 class StorageUnit(object):
     """Document the class as needed"""
@@ -36,6 +42,9 @@ def say_kuku():
     secrate_massage()
     #print('kuku')
 
+
+def false_function():
+    return False
 
 def main():
     print('Run : ', os.path.realpath(__file__),' as __main__')
