@@ -44,14 +44,16 @@ jobs:
     
   Deploy:
 
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     strategy:
-      matrix:
-        python-version: [3.9]
-        # python-version: [3.7, 3.8, 3.9]
-
+     matrix:
+       python-version: [3.9]
     steps:
     - uses: actions/checkout@v2
-    - name: Deploy to GCP Cloud run
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: GCP Deploy to Cloud Run 
       run: |
-        echo 'Cloud Run'
+        echo '<<< Cloud Run >>>'      
