@@ -44,17 +44,43 @@ jobs:
     
   Deploy_to_Cloud_Run:
     needs: build 
-
     runs-on: ubuntu-latest
+    
     strategy:
      matrix:
        python-version: [3.9]
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+    
+    
+    #By default, this action (docker/) uses the Git context so you don't need to use the actions/checkout action to checkout the repository,
+    #because this will be done directly by buildkit.
+    
+    # setup-buildx action will create and boot a builder using by default the docker-container builder driver. 
+    #This is not required but recommended using it to be able to build multi-platform images, export cache, etc.
+    - name: Docker Setup Buildx
+      uses: docker/setup-buildx-action@v1.1.1
+      
+    - name: Docker Login
+      uses: docker/login-action@v1.8.0
       with:
-        python-version: ${{ matrix.python-version }}
+        # Server address of Docker registry. If not set then will default to Docker Hub, Test with GCP Container regisrty.
+        #registry: 
+        # Username used to log against the Docker registry
+        username: ${{ secrets.DOCKERHUB_USERNAME }}  
+        # Password or personal access token used to log against the Docker registry
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v2.3.0
+      with:
+        tags: ci-cd-app:1.0.0 
+        push: true
+    
+
+      
+  
     - name: GCP Deploy to Cloud Run 
       run: |
         echo '<<< Cloud Run >>>'      
