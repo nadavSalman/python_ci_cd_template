@@ -16,6 +16,7 @@ print('Someone imprted me ...')
 
 def secrate_massage():
     print('Bla bla lal lal 123')
+    return 'Bla bla lal lal 123'
 
 def get_items():
     return [x for x in range(1,11)]

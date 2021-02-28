@@ -7,28 +7,26 @@ import pkg_resources
 
 
 
+import os
+
+from flask import Flask
+
+app = Flask(__name__)
 
 
-def main():
-	print('View installed Packages >>>>')
-	installed_packages = pkg_resources.working_set
-	installed_packages_list = sorted(["%s==%s" % (i.key, i.version)for i in installed_packages])
-	print(installed_packages_list)
-	print('~~~~~~~~~~~~~~~~~')
-	# say_kuku()
-	print('__file__ -> ',__file__)
-	currentdir = os.path.dirname(os.path.realpath(__file__))
-	print('currentdir -> ',currentdir)
-	parentdir = os.path.dirname(currentdir)
-	print('parentdir -> ',parentdir)
-	# sys.path.append(parentdir)
-    
-    # print(get_items())
-    
-    # instance = StorageUnit("RS:2111","tork-g59")
-    # print('instance.summarize() -> ', instance.summarize())
+@app.route("/")
+def hello_world():
+    name = os.environ.get("NAME", "World")
+    return "Hello {}!".format(name)
 
-    # print('dir() -> ',dir())
+@app.route("/storage")
+def get_storage():
+	return say_kuku()
+
+@app.route("/item")
+def get_item():
+	return secrate_massage()
+
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

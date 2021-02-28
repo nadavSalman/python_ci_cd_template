@@ -39,8 +39,11 @@ class StorageUnit(object):
 
 
 def say_kuku():
-    secrate_massage()
+    return secrate_massage()
+     
     #print('kuku')
+
+    
 
 
 def false_function():
