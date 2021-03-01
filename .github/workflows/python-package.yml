@@ -54,7 +54,7 @@ jobs:
     - name: GCP Deploy to Cloud Run 
       run: | 
         docker --version
-        docker build -t ci-cd-pipline:1.0.0
+        docker build -t ci-cd-pipline:1.0.0 .
         docker images
 
         
