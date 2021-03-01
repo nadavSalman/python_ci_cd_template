@@ -43,7 +43,7 @@ jobs:
         python -m unittest -v
     
   Deploy_to_Cloud_Run:
-    needs: build 
+#     needs: build 
     runs-on: ubuntu-latest
     
     strategy:
