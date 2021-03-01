@@ -51,6 +51,13 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}   
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
+      run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
     - name: Dcoker build
       run: | 
         ls
@@ -58,13 +65,3 @@ jobs:
         docker --version
         docker build -t ci-cd-pipline:1.0.0 .
         docker images
-    - name: Docker login
-      env:
-        DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        
-        #docker lo
-
-        
