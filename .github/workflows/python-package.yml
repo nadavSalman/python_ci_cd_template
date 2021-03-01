@@ -53,7 +53,7 @@ jobs:
 #     - uses: actions/checkout@v2
     - name: GCP Deploy to Cloud Run 
       run: | 
-        ll
+        ls
         pwd
         docker --version
         docker build -t ci-cd-pipline:1.0.0 .
