@@ -46,11 +46,11 @@ jobs:
 #     needs: build 
     runs-on: ubuntu-latest
     
-    strategy:
-     matrix:
-       python-version: [3.9]
+#     strategy:
+#      matrix:
+#        python-version: [3.9]
     steps:
-#     - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: GCP Deploy to Cloud Run 
       run: | 
         ls
