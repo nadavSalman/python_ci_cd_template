@@ -56,8 +56,8 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}   
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
       run: |
-          $($DOCKER_PASSWORD) > my_password.txt 
-          cat my_password.txt | docker login --username nadavdevops --password-stdin
+          echo $($DOCKER_PASSWORD)
+          echo $($DOCKER_PASSWORD) | docker login --username nadavdevops --password-stdin
           #docker login --username nadavdevops --password "$DOCKER_PASSWORD"
 
     - name: Dcoker build
