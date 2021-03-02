@@ -52,9 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: source code checkout
-      run: |
-        echo "[source code checkout]
-        ls
+ 
         
     
 #     - name: Docker Login
