@@ -51,6 +51,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+    - name: source code checkout
+      run: |
+        echo "[source code checkout]
+        ls
+        
     
 #     - name: Docker Login
 #       env:
@@ -64,15 +69,15 @@ jobs:
 #         password: $DOCKER_PASSWORD
 
 
-    - name: Docker Build & Push Action
-      uses: mr-smithers-excellent/docker-build-push@v5
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        image: docker-hub-repo/ci-cd-pipline
-        tags: v1, latest
-        registry: registry-url.io
-        dockerfile: Dockerfile.ci
+        name: nadavdevops/ool:ci-cd-pipline
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        registry: docker.pkg.github.com
+
 
 
 #     - name: docker-login
