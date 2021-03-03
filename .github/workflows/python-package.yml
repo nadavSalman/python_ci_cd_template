@@ -43,7 +43,7 @@ jobs:
         python -m unittest -v
     
   Docker-build-and-push:
-    needs: build 
+#     needs: build 
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -57,7 +57,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     - name: source code checkout
       run: |
-        docker login --username 'nadavdevops' --password $DOCKER_PASSWORD
+        docker login --username 'nadavdevops' --password ${DOCKER_PASSWORD}
 
         
         
