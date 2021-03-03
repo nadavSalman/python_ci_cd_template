@@ -57,8 +57,8 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     - name: source code checkout
       run: |
-        docker login --username 'nadavdevops' --password ${DOCKER_PASSWORD}
-
+        echo "$DOCKER_PASSWORD" | docker login -u 'nadavdevops' --password-stdin
+        
         
         
 #     - name: Build and Push Docker Image
