@@ -51,13 +51,14 @@ jobs:
     
     steps:
     
-#     - uses: actions/checkout@v2
-#     - uses: secrethub/actions/env-export@v0.2.1
-#       env:
-#         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-#     - name: source code checkout
-#       run: |
-#         echo "$DOCKER_PASSWORD" | docker login -u 'nadavdevops' --password-stdin
+    - uses: actions/checkout@v2
+    - uses: secrethub/actions/env-export@v0.2.1
+     
+    - name: source code checkout
+      run: |
+        pwd
+        ls
+        
         
         
         
