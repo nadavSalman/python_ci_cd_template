@@ -51,24 +51,43 @@ jobs:
     
     steps:
     
-    - uses: actions/checkout@v2
-    - uses: secrethub/actions/env-export@v0.2.1
+     - uses: actions/checkout@master
+
+     - name: Login to docker hub
+       if: success()
+       uses: actions-hub/docker/login@master
+       env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+     - name: Build image
+       if: success()
+       run: docker build -t nadavdevops/ool:1.0.0 .
+
+     - name: Push to docker registry
+       if: success()
+       uses: actions-hub/docker@master
+       with:
+         args: push nadavdevops/ool:1.0.0
+
+#     - uses: actions/checkout@v2
+#     - uses: secrethub/actions/env-export@v0.2.1
      
-    - name: source code checkout
-      run: |
-        pwd
-        ls
+#     - name: source code checkout
+#       run: |
+#         pwd
+#         ls
         
         
         
         
-    - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v4
-      with:
-        image: nadavdevops/ool
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+#     - name: Build and Push Docker Image
+#       uses: mr-smithers-excellent/docker-build-push@v4
+#       with:
+#         image: nadavdevops/ool
+#         registry: docker.io
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
 
     
 #     - name: Publish to Registry
