@@ -48,15 +48,19 @@ jobs:
         docker build -t "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" .
+    
+    - name: Login
+      run: |
+        docker images
 
     # Push the Docker image to Google Container Registry
-    - name: Publish
-      run: |
-        export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
-        echo $TAG
-        docker push "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG"
-        docker tag "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" "$REGISTRY_HOSTNAME"/"$IMAGE":latest
-        docker push "$REGISTRY_HOSTNAME"/"$IMAGE":latest
+#     - name: Publish
+#       run: |
+#         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+#         echo $TAG
+#         docker push "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG"
+#         docker tag "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" "$REGISTRY_HOSTNAME"/"$IMAGE":latest
+#         docker push "$REGISTRY_HOSTNAME"/"$IMAGE":latest
 
 # jobs:
 #   build:
