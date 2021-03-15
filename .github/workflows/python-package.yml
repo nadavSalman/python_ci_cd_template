@@ -24,22 +24,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-#     # Setup gcloud CLI
-#     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-#       with:
-#         version: '1.0.0'
-#         service_account_key: ${{ secrets.GCR_KEY }} 
-
-#     # Configure docker to use the gcloud command-line tool as a credential helper
-#     - run: |
-#         # Set up docker to authenticate
-#         # via gcloud command-line tool.
-#         gcloud auth configure-docker
-
-
-    - name: Login
-      run: |
-        docker login -u _json_key -p "$(echo ${{ secrets.GCR_KEY }})" https://gcr.io
     # Build the Docker image
     - name: Build
       run: |
@@ -49,7 +33,8 @@ jobs:
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" .
     
-    - name: Login
+    # View images : 
+    - name: Docker images
       run: |
         docker images
 
