@@ -3,11 +3,11 @@
 
 name: Python package
 
-env:
-  GITHUB_SHA: ${{ github.sha }} 
-  GITHUB_REF: ${{ github.ref }} 
-  IMAGE: ci-cd-dev
-  REGISTRY_HOSTNAME: gcr.io
+# env:
+#   GITHUB_SHA: ${{ github.sha }} 
+#   GITHUB_REF: ${{ github.ref }} 
+#   IMAGE: ci-cd-dev
+#   REGISTRY_HOSTNAME: gcr.io
 
 on:
   push:
