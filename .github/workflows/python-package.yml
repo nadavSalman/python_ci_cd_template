@@ -23,24 +23,34 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v2
-    
-    
-    - name: Login to gcloud registry
-      id: gcloud
-      uses: elgohr/gcloud-login-action@master
+  
+  
+    - name: Docker Login
+      # You may pin to the exact commit or the version.
+      # uses: docker/login-action@f3364599c6aa293cdc2b8391b1b56d0c30e45c8a
+      uses: docker/login-action@v1.8.0
       with:
-        version: '270.0.0'
-        account_key: ${{ secrets.GCR_KEY }} 
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+     
+     
+     
+#     - name: Login to gcloud registry
+#       id: gcloud
+#       uses: elgohr/gcloud-login-action@master
+#       with:
+#         version: '270.0.0'
+#         account_key: ${{ secrets.GCR_KEY }} 
      
     
-    # Build the Docker image
-    - name: Build
-      run: |
-        export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
-        echo $TAG
-        docker build -t "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" .
+#     # Build the Docker image
+#     - name: Build
+#       run: |
+#         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+#         echo $TAG
+#         docker build -t "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" \
+#           --build-arg GITHUB_SHA="$GITHUB_SHA" \
+#           --build-arg GITHUB_REF="$GITHUB_REF" .
     
     # View images : 
     - name: Docker images
