@@ -1,53 +1,9 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: CI to Docker hub 
 
-on:
 
-  push:
-
-    branches: [ master ]
-
-  steps:
-
-      -
-
-        name: Login to DockerHub
-
-        uses: docker/login-action@v1 
-
-        with:
-
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      -
-
-        name: Build and push
-
-        id: docker_build
-
-        uses: docker/build-push-action@v2
-
-        with:
-
-          context: ./
-
-          file: ./Dockerfile
-
-          push: true
-
-          tags: bengotch/simplewhale:latest
-
-      -
-
-        name: Image digest
-
-        run: echo ${{ steps.docker_build.outputs.digest }}
-
-# name: Python package
+name: Python package
 
 # env:
 #   GITHUB_SHA: ${{ github.sha }} 
@@ -55,20 +11,40 @@ on:
 #   IMAGE: ci-cd-dev
 #   REGISTRY_HOSTNAME: gcr.io
 
-# on:
-#   push:
-#     branches: [ main ]
-#   pull_request:
-#     branches: [ main ]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
     
-# jobs:
-#   setup-build-publish-deploy:
-#     name: Setup, Build, and Publish
-#     runs-on: ubuntu-latest
-#     steps:
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, and Publish
+    runs-on: ubuntu-latest
+    steps:
 
-#     - name: Checkout
-#       uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: bengotch/simplewhale:latest
+
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
   
   
 #     - name: Docker Login
