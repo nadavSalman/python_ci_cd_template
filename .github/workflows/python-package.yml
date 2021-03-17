@@ -20,9 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to DockerHub 
-        env: # Or as an environment variable
-          DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
