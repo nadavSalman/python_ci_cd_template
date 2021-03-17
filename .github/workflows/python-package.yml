@@ -58,10 +58,10 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           
       
-#     - name: Push image
-#       run: |
-#         export TAG=`echo "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"`
-#         docker push $TAG
+    - name: Push image
+      run: |
+        export TAG=`echo "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"`
+        docker push nadavdevops/ci-cd-dev:latest
     
 
       
