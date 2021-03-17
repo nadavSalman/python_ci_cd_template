@@ -41,7 +41,7 @@ jobs:
         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
         export TAG="latest"
         echo $TAG
-        docker build -t "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"
+        docker build -t "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG" .
      
     
     # View images : 
