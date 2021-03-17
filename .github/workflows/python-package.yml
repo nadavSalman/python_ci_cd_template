@@ -25,6 +25,19 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v2
+      
+    - name: Docker meta
+      id: docker_meta
+      uses: crazy-max/ghaction-docker-meta@v1
+      with:
+        images: imagehostmad/posts
+        tag-sha: true
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+      with:
+        version: latest
     
     
     - name: Login to DockerHub
