@@ -98,10 +98,10 @@ on:
 #           --build-arg GITHUB_SHA="$GITHUB_SHA" \
 #           --build-arg GITHUB_REF="$GITHUB_REF" .
     
-    # View images : 
-    - name: Docker images
-      run: |
-        docker images
+#     # View images : 
+#     - name: Docker images
+#       run: |
+#         docker images
 
     # Push the Docker image to Google Container Registry
 #     - name: Publish
