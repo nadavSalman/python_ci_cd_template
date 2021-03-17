@@ -11,10 +11,8 @@ name: Python package
 #   IMAGE: ci-cd-dev
 #   REGISTRY_HOSTNAME: gcr.io
 
-on:
-  push:
-    tags:
-      - v*
+on: push
+
     
 jobs:
   setup-build-publish-deploy:
