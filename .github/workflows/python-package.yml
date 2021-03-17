@@ -22,14 +22,23 @@ jobs:
     name: Setup, Build, and Publish
     runs-on: ubuntu-latest
     steps:
-      - name: Login to DockerHub 
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          logout: true
-
-
+    
+      - name: Hello world action
+        env: # Or as an environment variable
+          DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+        run: |
+          echo "docker env : $DOCKER_HUB_ACCESS_TOKEN $DOCKER_HUB_USERNAME"
+          
+          
+#       - name: Login to DockerHub 
+#         uses: docker/login-action@v1 
+#         with:
+#           username: ${{ secrets.DOCKER_HUB_USERNAME }}
+#           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+#           logout: true
+# 
+# 
   
   
 #     - name: Docker Login
