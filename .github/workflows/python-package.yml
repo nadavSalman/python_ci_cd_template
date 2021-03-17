@@ -39,7 +39,7 @@ jobs:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       run: |
         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
-        export TAG="latest"
+        #export TAG="latest"
         echo $TAG
         docker build -t "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG" .
      
@@ -61,7 +61,9 @@ jobs:
     - name: Push image
       run: |
         export TAG=`echo "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"`
-        docker push nadavdevops/ci-cd-dev:latest
+        echo $TAG
+        export FULL_IMAGE_PATH="$DOCKER_HUB_USERNAME+"/"+"$IMAGE"+":"+"$TAG" 
+        docker push $FULL_IMAGE_PATH
     
 
       
