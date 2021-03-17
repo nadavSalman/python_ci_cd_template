@@ -5,11 +5,11 @@
 
 name: Python package
 
-# env:
-#   GITHUB_SHA: ${{ github.sha }} 
-#   GITHUB_REF: ${{ github.ref }} 
-#   IMAGE: ci-cd-dev
-#   REGISTRY_HOSTNAME: gcr.io
+env:
+  GITHUB_SHA: ${{ github.sha }} 
+  GITHUB_REF: ${{ github.ref }} 
+  IMAGE: ci-cd-dev
+  REGISTRY_HOSTNAME: none
 
 on: push
 
@@ -19,9 +19,30 @@ jobs:
     name: Setup, Build, and Publish
     runs-on: ubuntu-latest
     steps:
-      - name: Login to DockerHub 
-        uses: docker/login-action@v1 
-        with:
+    
+    
+    #     # Build the Docker image
+    - name: Build
+      env: 
+        DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      run: |
+        export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+        echo $TAG
+        docker build -t "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" .
+    
+    # View images : 
+    - name: Docker images
+      run: |
+        docker images
+
+
+
+    - name: Login to DockerHub 
+      uses: docker/login-action@v1 
+      with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
@@ -29,14 +50,7 @@ jobs:
 
   
   
-#     - name: Docker Login
-#       # You may pin to the exact commit or the version.
-#       # uses: docker/login-action@f3364599c6aa293cdc2b8391b1b56d0c30e45c8a
-#       uses: docker/login-action@v1.8.0
-#       with:
-#         username: ${{ secrets.DOCKER_HUB_USERNAME }}
-#         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-     
+
      
      
 #     - name: Login to gcloud registry
@@ -47,19 +61,7 @@ jobs:
 #         account_key: ${{ secrets.GCR_KEY }} 
      
     
-#     # Build the Docker image
-#     - name: Build
-#       run: |
-#         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
-#         echo $TAG
-#         docker build -t "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" \
-#           --build-arg GITHUB_SHA="$GITHUB_SHA" \
-#           --build-arg GITHUB_REF="$GITHUB_REF" .
-    
-#     # View images : 
-#     - name: Docker images
-#       run: |
-#         docker images
+
 
     # Push the Docker image to Google Container Registry
 #     - name: Publish
