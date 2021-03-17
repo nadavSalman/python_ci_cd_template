@@ -39,10 +39,10 @@ jobs:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       run: |
         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+        export TAG="latest"
         echo $TAG
-        docker build -t "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" .
+        docker build -t "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"
+     
     
     # View images : 
     - name: Docker images
@@ -58,10 +58,10 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           
       
-    - name: Push image
-      run: |
-        export TAG=`echo "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"`
-        docker push $TAG
+#     - name: Push image
+#       run: |
+#         export TAG=`echo "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"`
+#         docker push $TAG
     
 
       
