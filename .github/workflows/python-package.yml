@@ -10,6 +10,8 @@ env:
   GITHUB_REF: ${{ github.ref }} 
   IMAGE: ci-cd-dev
   REGISTRY_HOSTNAME: none
+  DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
 
 on: push
 
@@ -49,9 +51,9 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           
       
-#     - name: Push image
-#       run: |
-#         docker push "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"
+    - name: Push image
+      run: |
+        docker push "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"
     
 
       
