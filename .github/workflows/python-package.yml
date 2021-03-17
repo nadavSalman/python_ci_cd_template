@@ -12,6 +12,7 @@ env:
   REGISTRY_HOSTNAME: none
   DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+  
 
 on: push
 
@@ -24,7 +25,13 @@ jobs:
     - uses: actions/checkout@v2
     
     
-
+#     - name: Build and push
+#       uses: docker/build-push-action@v2
+#       with:
+#         context: .
+#         push: true
+#         tags: $DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG
+        
     # Build the Docker image
     - name: Build
       env: 
@@ -53,7 +60,8 @@ jobs:
       
     - name: Push image
       run: |
-        docker push "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"
+        export TAG=`echo "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"`
+        docker push $TAG
     
 
       
