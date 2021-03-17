@@ -62,7 +62,7 @@ jobs:
       run: |
         export TAG=`echo "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG"`
         echo $TAG
-        export FULL_IMAGE_PATH="$DOCKER_HUB_USERNAME+"/"+"$IMAGE"+":"+"$TAG" 
+        export FULL_IMAGE_PATH=`echo "$DOCKER_HUB_USERNAME+"/"+"$IMAGE"+":"+"$TAG" `
         echo $FULL_IMAGE_PATH
         docker push | echo $FULL_IMAGE_PATH
     
