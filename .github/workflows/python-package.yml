@@ -18,7 +18,12 @@ on: push
 
     
 jobs:
-  setup-build-publish-deploy:
+  job1:
+    name: sd sd
+    runs-on: ubuntu-latest
+  
+  install-dependecies-and-tests:
+    needs: [job1]
     name: CI-CD Pipline
     runs-on: ubuntu-latest
     strategy:
@@ -53,7 +58,7 @@ jobs:
         echo 'Run tests'
         echo 'Soon will be transfer to pytest'
         python -m unittest -v
-        
+        setup-build-publish-deploy:  
     # Build the Docker image
     - name: Build
       env: 
