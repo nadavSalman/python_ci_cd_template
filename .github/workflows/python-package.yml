@@ -18,51 +18,60 @@ on: push
 
     
 jobs:
-  job1:
-    name: sd sd
+  install-dependecies-and-tests:
+    name: CI-install-dependecies-and-tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+        # python-version: [3.7, 3.8, 3.9]
     steps:
       - name: important-task
         run: |
           echo 'Job 1'
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          
+          
+      - name: Lint with flake8
+        run: |
+          echo 'Lint in feature'
+          # stop the build if there are Python syntax errors or undefined names
+          # flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          # flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-  install-dependecies-and-tests:
-    needs: [job1]
-    name: CI-CD Pipline
+      - name: Test with unittest 
+        run: |
+          echo 'Run tests'
+          echo 'Soon will be transfer to pytest'
+          python -m unittest -v    
+          
+      
+
+  image-build-and-push:
+    needs: [install-dependecies-and-tests]
+    name: CI-image-build-and-push
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.9]
         # python-version: [3.7, 3.8, 3.9]
         
+        
+        
+        
+        
     steps:
     - uses: actions/checkout@v2
     
-#     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    
-    - name: Lint with flake8
-      run: |
-        echo 'Lint in feature'
-        # stop the build if there are Python syntax errors or undefined names
-        # flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        # flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    
-    - name: Test with unittest 
-      run: |
-        echo 'Run tests'
-        echo 'Soon will be transfer to pytest'
-        python -m unittest -v
-        setup-build-publish-deploy:  
     # Build the Docker image
     - name: Build
       env: 
