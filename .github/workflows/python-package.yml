@@ -21,7 +21,11 @@ jobs:
   job1:
     name: sd sd
     runs-on: ubuntu-latest
-  
+    steps:
+      - name: important-task
+        run: |
+          echo 'Job 1'
+
   install-dependecies-and-tests:
     needs: [job1]
     name: CI-CD Pipline
