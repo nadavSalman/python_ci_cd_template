@@ -23,10 +23,7 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-      - name: important-task
-        run: |
-          echo 'Job 1'
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
@@ -88,4 +85,31 @@ jobs:
     - name: Push image
       run: |
         docker push nadavdevops/ci-cd-dev:latest
-   
+  
+  
+  image-build-and-push-GCP:
+    needs: [install-dependecies-and-tests]
+    name: CI-image-build-and-push-to-GCP
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    # Build the Docker image
+    - name: Build
+      env: 
+        DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      run: |
+        echo 'GCP'
+       
+  
+  
+  
+  
+  
+  
+  
+  
+
+
