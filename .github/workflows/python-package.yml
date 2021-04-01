@@ -88,7 +88,7 @@ jobs:
   
   
   image-build-and-push-GCP:
-    needs: [install-dependecies-and-tests]
+    needs: [image-build-and-push]
     name: CI-image-build-and-push-to-GCP
     runs-on: ubuntu-latest
 
