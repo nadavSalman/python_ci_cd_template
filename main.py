@@ -16,8 +16,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    name = os.environ.get("NAME", "World")
-    return "Hello {}!".format(name)
+    name = os.environ.get("NAME", "Nadav Salman")
+    return "{} CI-CD template . (Deployed uding : GCP Cloud Run) !!! \n".format(name)
 
 @app.route("/storage")
 def get_storage():
@@ -25,7 +25,7 @@ def get_storage():
 
 @app.route("/item")
 def get_item():
-	return secrate_massage()
+	return " {}! \n".format(secrate_massage())
 
 
 if __name__ == "__main__":
