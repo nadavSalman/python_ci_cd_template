@@ -47,7 +47,7 @@ def say_kuku():
 
 
 def false_function():
-    return True
+    return False
 
 def main():
     print('Run : ', os.path.realpath(__file__),' as __main__')
