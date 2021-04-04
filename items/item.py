@@ -16,7 +16,7 @@ print('Someone imprted me ...')
 
 def secrate_massage():
     print('Bla bla lal lal 123')
-    return 'Another, quite new and good massage place in Kamala, along the short cut road of the first traffic light to the beach road. Khun Fo, who was running Andaman massage before in Surin moved to Kamala recently. Excellent service and friendly staff'
+    return '>>>Another, quite new and good massage place in Kamala, \n along the short cut road of the first traffic light to the beach road. Khun Fo, \n who was running Andaman massage before in Surin moved to Kamala recently. Excellent service and friendly staff'
 
 def get_items():
     return [x for x in range(1,11)]
