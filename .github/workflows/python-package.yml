@@ -47,6 +47,7 @@ jobs:
         run: |
           echo 'Run tests'
           echo 'Soon will be transfer to pytest'
+          pwd
           python -m unittest -v    
           
       
