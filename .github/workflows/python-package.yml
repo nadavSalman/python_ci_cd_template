@@ -68,6 +68,7 @@ jobs:
       run: |
         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
         export TAG="latest"
+        export TAG=$GITHUB_RUN_ID
         echo $TAG
         docker build -t "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG" .
      
