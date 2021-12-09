@@ -12,6 +12,7 @@ env:
   REGISTRY_HOSTNAME: none
   DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+  TAG: $GITHUB_RUN_ID
   
 
 on: push
@@ -86,7 +87,7 @@ jobs:
       
     - name: Push image
       run: |
-        docker push nadavdevops/ci-cd-dev:latest
+        docker push nadavdevops/ci-cd-dev:$TAG
   
   
   GCP-Cloud-Run:
