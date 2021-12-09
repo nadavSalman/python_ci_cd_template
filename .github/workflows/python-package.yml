@@ -12,7 +12,6 @@ env:
   REGISTRY_HOSTNAME: none
   DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-  TAG: $GITHUB_RUN_ID
   
 
 on: push
@@ -87,6 +86,7 @@ jobs:
       
     - name: Push image
       run: |
+        export TAG=$GITHUB_RUN_ID
         export REPOSITORY_NAME="nadavdevops"
         docker push "$REPOSITORY_NAME"/"$IMAGE":"$TAG" 
         #nadavdevops/ci-cd-dev:$TAG
