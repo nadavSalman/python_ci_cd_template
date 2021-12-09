@@ -67,7 +67,7 @@ jobs:
         DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       run: |
         export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
-        export TAG="latest"
+        
         export TAG=$GITHUB_RUN_ID
         echo $TAG
         docker build -t "$DOCKER_HUB_USERNAME"/"$IMAGE":"$TAG" .
@@ -91,7 +91,8 @@ jobs:
         docker push "$REPOSITORY_NAME"/"$IMAGE":"$TAG" 
 
         echo "Push latest tag"
-        docker tag "$REPOSITORY_NAME"/"$IMAGE":"$TAG"   "$REPOSITORY_NAME"/"$IMAGE":latest" 
+        export LATEST_TAG="latest"
+        docker tag "$REPOSITORY_NAME"/"$IMAGE":"$TAG"  "$REPOSITORY_NAME"/"$IMAGE":"$LATEST_TAG"
         docker push "$REPOSITORY_NAME"/"$IMAGE":latest" 
         #nadavdevops/ci-cd-dev:$TAG
   
