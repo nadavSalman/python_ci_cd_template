@@ -87,7 +87,9 @@ jobs:
       
     - name: Push image
       run: |
-        docker push nadavdevops/ci-cd-dev:$TAG
+        export REPOSITORY_NAME="nadavdevops"
+        docker push "$REPOSITORY_NAME"/"$IMAGE":"$TAG" 
+        #nadavdevops/ci-cd-dev:$TAG
   
   
   GCP-Cloud-Run:
