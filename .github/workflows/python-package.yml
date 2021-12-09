@@ -93,7 +93,7 @@ jobs:
         echo "Push latest tag"
         export LATEST_TAG="latest"
         docker tag "$REPOSITORY_NAME"/"$IMAGE":"$TAG"  "$REPOSITORY_NAME"/"$IMAGE":"$LATEST_TAG"
-        docker push "$REPOSITORY_NAME"/"$IMAGE":latest" 
+        docker push  "$REPOSITORY_NAME"/"$IMAGE":"$LATEST_TAG"
         #nadavdevops/ci-cd-dev:$TAG
   
   
