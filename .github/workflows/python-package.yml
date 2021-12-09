@@ -89,6 +89,7 @@ jobs:
         export TAG=$GITHUB_RUN_ID
         export REPOSITORY_NAME="nadavdevops"
         docker push "$REPOSITORY_NAME"/"$IMAGE":"$TAG" 
+        docker push "$REPOSITORY_NAME"/"$IMAGE":latest" 
         #nadavdevops/ci-cd-dev:$TAG
   
   
